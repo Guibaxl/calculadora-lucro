@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Lucro - Exército Brasileiro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #2E3B1E;
+            color: #FFD700;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            box-shadow: 2px 2px 15px rgba(255, 215, 0, 0.5);
+            background-color: #3B5323;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            width: 80%;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            background-color: #556B2F;
+            color: #FFD700;
+            text-align: center;
+        }
+        button {
+            background-color: #FFD700;
+            color: #2E3B1E;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #E6C300;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Lucro - Exército Brasileiro</h2>
+        <label for="qtdArmas">Quantidade de Armas:</label>
+        <input type="number" id="qtdArmas" value="0">
+        
+        <label for="qtdMunicao">Quantidade de Munições:</label>
+        <input type="number" id="qtdMunicao" value="0">
+        
+        <button onclick="calcularLucro()">Calcular</button>
+        
+        <h3 id="resultado"></h3>
+        <h3 id="valorBau"></h3>
+    </div>
+
+    <script>
+        function calcularLucro() {
+            let qtdArmas = parseInt(document.getElementById("qtdArmas").value) || 0;
+            let qtdMunicao = parseInt(document.getElementById("qtdMunicao").value) || 0;
+            
+            let precoBauArma = 120000;
+            let precoVendaArma = 220000;
+            let precoBauMunicao = 700;
+            let precoVendaMunicao = 1200;
+            
+            // Cálculo do lucro bruto
+            let lucroBrutoArmas = (precoVendaArma - precoBauArma) * qtdArmas;
+            let lucroBrutoMunicao = (precoVendaMunicao - precoBauMunicao) * qtdMunicao;
+            let lucroBruto = lucroBrutoArmas + lucroBrutoMunicao;
+            
+            // Aplicação do desconto de 20%
+            let desconto = lucroBruto * 0.2;
+            let lucroFinal = lucroBruto - desconto;
+            
+            document.getElementById("resultado").innerText = `Lucro líquido após 20% de desconto: R$ ${lucroFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            document.getElementById("valorBau").innerText = `Valor a ser colocado no baú (20% do lucro): R$ ${desconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+        }
+    </script>
+</body>
+</html>
